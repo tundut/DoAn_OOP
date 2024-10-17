@@ -1,0 +1,15 @@
+E:\UEH\Sophomore\OOP\BT\DA_CK\bin\Debug\net8.0\DA_CK.exe
+E:\UEH\Sophomore\OOP\BT\DA_CK\bin\Debug\net8.0\DA_CK.deps.json
+E:\UEH\Sophomore\OOP\BT\DA_CK\bin\Debug\net8.0\DA_CK.runtimeconfig.json
+E:\UEH\Sophomore\OOP\BT\DA_CK\bin\Debug\net8.0\DA_CK.dll
+E:\UEH\Sophomore\OOP\BT\DA_CK\bin\Debug\net8.0\DA_CK.pdb
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.GeneratedMSBuildEditorConfig.editorconfig
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.AssemblyInfoInputs.cache
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.AssemblyInfo.cs
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.csproj.CoreCompileInputs.cache
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.sourcelink.json
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.dll
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\refint\DA_CK.dll
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.pdb
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\DA_CK.genruntimeconfig.cache
+E:\UEH\Sophomore\OOP\BT\DA_CK\obj\Debug\net8.0\ref\DA_CK.dll
