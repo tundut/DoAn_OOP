@@ -1,6 +1,6 @@
 class HoaDonNhap : HoaDon
 {
-    KhachHang khach_hang;
+    CuaHang cua_hang;
 
     public override string ToString()
     {

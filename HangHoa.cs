@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.InteropServices.Marshalling;
 
-abstract class HangHoa
+abstract class HangHoa : ICloneable
 {
     public string id;
     public string ten_hang;
@@ -17,4 +17,13 @@ abstract class HangHoa
     }
 
     public override abstract string ToString();
+    public object Clone()
+    {
+        HangHoa clone = (HangHoa)this.MemberwiseClone();
+        clone.id = this.id;
+        clone.ten_hang = this.ten_hang;
+        clone.don_gia = this.don_gia;
+        return clone;
+
+    }
 }
