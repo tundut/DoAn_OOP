@@ -1,7 +1,7 @@
 class NhanVien
 {
-    private string id_nv;
-    private string ten_nv;
+    public string id_nv;
+    public string ten_nv;
     private uint tuoi;
     private bool gioi_tinh;
     private string dia_chi_nv;

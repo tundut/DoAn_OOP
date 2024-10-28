@@ -22,11 +22,11 @@ internal class Program
         kho.ds_cua_hang.Add(new CuaHang("CH02", "Cua hang 2", "Quan 3"));
         kho.ds_cua_hang.Add(new CuaHang("CH03", "Cua hang 3", "Quan 10"));
 
-        kho.ds_ncc.Add(new NhaCungCap("NCC01", "ABC Corporation", "0987654321"));
-        kho.ds_ncc.Add(new NhaCungCap("NCC02", "XYZ Corporation", "0123456789"));
-        kho.ds_ncc.Add(new NhaCungCap("NCC03", "DEF Corporation", "1234567890"));
+        kho.ds_ncc.Add(new NhaCungCap("NCC01", "ABC Corporation", "Tan Binh"));
+        kho.ds_ncc.Add(new NhaCungCap("NCC02", "XYZ Corporation", "Binh Chanh"));
+        kho.ds_ncc.Add(new NhaCungCap("NCC03", "DEF Corporation", "Binh Thanh"));
 
-
+        NhanVien nv_hien_tai = kho.ds_nhan_vien.Find(nv => nv.id_nv == "NV01");
 
         Console.WriteLine("1. Xem danh sach san pham");
         Console.WriteLine("2. Xem danh sach nhan vien");
@@ -77,10 +77,10 @@ internal class Program
 
                 case 4:
                     Console.WriteLine("Danh sach nha cung cap: ");
-                    Console.WriteLine($"{"Ten"} | {"Dia chi"} | {"So dien thoai"}");
+                    Console.WriteLine($"{"ID",-5} | {"Ten nha cung cap",-20} | {"Dia chi",-20}");
                     foreach (NhaCungCap ncc in kho.ds_ncc)
                     {
-                        Console.WriteLine($"{ncc.ten_ncc,-20} | {ncc.dia_chi_ncc,-20} | {ncc.sdt_ncc,-15}");
+                        Console.WriteLine(ncc.ToString());
                     }
                     break;
 
@@ -164,9 +164,15 @@ internal class Program
                                 }
                                 break;
                             case 4:
+                                Console.Write("Nhap ID nha cung cap: ");
+                                string id_ncc_cc = Console.ReadLine();
+                                NhaCungCap ncc = kho.ds_ncc.Find(x => x.id_ncc == id_ncc_cc);
                                 kho.capnhatkho(ds_nhap.ds_san_pham, true);
                                 Console.WriteLine("Nhap hang thanh cong");
+                                HoaDonNhap hoa_don_nhap = new HoaDonNhap($"HD{kho.ds_hoa_don.Count + 1}", ds_nhap, nv_hien_tai, ncc);
+                                kho.ds_hoa_don.Add(hoa_don_nhap);
                                 ds_nhap = null;
+                                ncc = null;
                                 break;
                             case 0:
                                 break;
@@ -254,9 +260,17 @@ internal class Program
                                 }
                                 break;
                             case 4:
+                                Console.Write("Nhap ID cua hang nhan: ");
+                                string id_ch_nhan = Console.ReadLine();
+                                CuaHang ch_nhan = kho.ds_cua_hang.Find(x => x.id_ch == id_ch_nhan);
+                                kho.capnhatkho(ds_xuat.ds_san_pham, true);
+                                Console.WriteLine("Nhap hang thanh cong");
+                                HoaDonXuat hoa_don_xuat = new HoaDonXuat($"HD{kho.ds_hoa_don.Count + 1}", ds_xuat, nv_hien_tai, ch_nhan);
                                 kho.capnhatkho(ds_xuat.ds_san_pham, false);
                                 Console.WriteLine("Xuat hang thanh cong");
+                                kho.ds_hoa_don.Add(hoa_don_xuat);
                                 ds_xuat = null;
+                                ch_nhan = null;
                                 break;
                             case 0:
                                 break;
@@ -265,7 +279,10 @@ internal class Program
                     break;
 
                 case 7:
-
+                    foreach (HoaDon hoa_don in kho.ds_hoa_don)
+                    {
+                        Console.WriteLine(hoa_don.ToString());
+                    }
                     break;
 
                 case 0:
