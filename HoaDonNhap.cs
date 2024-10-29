@@ -19,7 +19,7 @@ class HoaDonNhap : HoaDon
         hoadon.AppendLine($" - Nhan vien lap: {nv_lap.ten_nv}");
         hoadon.AppendLine($" - Nha cung cap: {nha_cung_cap.id_ncc}");
         hoadon.AppendLine($" - Danh sach san pham:");
-        Console.WriteLine($"{"ID",-5} | {"Ten hang",-20} | {"So luong",-10} | {"Don gia",-15}");
+        hoadon.AppendLine($"{"ID",-5} | {"Ten hang",-20} | {"So luong",-10} | {"Don gia",-15}");
         foreach (HangHoa hangHoa in ds_san_pham.ds_san_pham)
         {
             hoadon.AppendLine(hangHoa.ToString());

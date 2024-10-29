@@ -99,6 +99,7 @@ internal class Program
                                 Console.WriteLine(hanghoa.ToString());
                             }
                         }
+
                         Console.WriteLine("1: Them san pham");
                         Console.WriteLine("2: Xoa san pham");
                         Console.WriteLine("3: Sua san pham");
@@ -106,6 +107,7 @@ internal class Program
                         Console.WriteLine("0: Huy");
                         Console.Write("Nhap so: ");
                         choice_nhap = Convert.ToInt32(Console.ReadLine());
+
                         switch (choice_nhap)
                         {
                             case 1:
@@ -113,64 +115,71 @@ internal class Program
                                 string id_them = Console.ReadLine();
                                 Console.Write("Nhap so luong san pham: ");
                                 uint so_luong_them = Convert.ToUInt32(Console.ReadLine());
-                                HangHoa sp_them;
-                                foreach (HangHoa hanghoa in kho.ds_san_pham)
+
+                                HangHoa sp_them = (HangHoa)kho.ds_san_pham.Find(hanghoa => hanghoa.id == id_them).Clone();
+                                HangHoa sp_ton_tai = ds_nhap.ds_san_pham.Find(hanghoa => hanghoa.id == id_them);
+
+                                if (sp_them != null)
                                 {
-                                    if (hanghoa.id == id_them)
+                                    if (sp_ton_tai == null)
                                     {
-                                        sp_them = (HangHoa)hanghoa.Clone();
                                         sp_them.so_luong = so_luong_them;
                                         ds_nhap.them_sp(sp_them);
-                                        break;
                                     }
-                                    if (kho.ds_san_pham.IndexOf(hanghoa) == kho.ds_san_pham.Count - 1)
+                                    else
                                     {
-                                        Console.WriteLine("San pham khong ton tai");
+                                        Console.WriteLine("San pham da ton tai");
                                     }
                                 }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
+                                }
                                 break;
+
                             case 2:
                                 Console.Write("Nhap ID san pham muon xoa: ");
                                 string id_xoa = Console.ReadLine();
-                                foreach (HangHoa hanghoa in ds_nhap.ds_san_pham)
+
+                                HangHoa sp_xoa = ds_nhap.ds_san_pham.Find(hanghoa => hanghoa.id == id_xoa);
+                                if (sp_xoa != null)
                                 {
-                                    if (hanghoa.id == id_xoa)
-                                    {
-                                        ds_nhap.xoa_sp(hanghoa);
-                                        break;
-                                    }
-                                    if (ds_nhap.ds_san_pham.IndexOf(hanghoa) == ds_nhap.ds_san_pham.Count - 1)
-                                    {
-                                        Console.WriteLine("San pham khong ton tai");
-                                    }
+                                    ds_nhap.xoa_sp(sp_xoa);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
                                 }
                                 break;
+
                             case 3:
                                 Console.Write("Nhap ID san pham muon sua: ");
                                 string id_sua = Console.ReadLine();
-                                foreach (HangHoa hanghoa in ds_nhap.ds_san_pham)
+
+                                HangHoa sp_sua = ds_nhap.ds_san_pham.Find(hanghoa => hanghoa.id == id_sua);
+                                if (sp_sua != null)
                                 {
-                                    if (hanghoa.id == id_sua)
-                                    {
-                                        Console.Write("Nhap so luong san pham moi: ");
-                                        uint so_luong_moi = Convert.ToUInt32(Console.ReadLine());
-                                        ds_nhap.capnhat_sp(hanghoa, so_luong_moi);
-                                        break;
-                                    }
-                                    if (ds_nhap.ds_san_pham.IndexOf(hanghoa) == ds_nhap.ds_san_pham.Count - 1)
-                                    {
-                                        Console.WriteLine("San pham khong ton tai");
-                                    }
+                                    Console.Write("Nhap so luong san pham moi: ");
+                                    uint so_luong_moi = Convert.ToUInt32(Console.ReadLine());
+                                    ds_nhap.capnhat_sp(sp_sua, so_luong_moi);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
                                 }
                                 break;
+
                             case 4:
                                 Console.Write("Nhap ID nha cung cap: ");
                                 string id_ncc_cc = Console.ReadLine();
+
                                 NhaCungCap ncc = kho.ds_ncc.Find(x => x.id_ncc == id_ncc_cc);
                                 kho.capnhatkho(ds_nhap.ds_san_pham, true);
                                 Console.WriteLine("Nhap hang thanh cong");
-                                HoaDonNhap hoa_don_nhap = new HoaDonNhap($"HD{kho.ds_hoa_don.Count + 1}", ds_nhap, nv_hien_tai, ncc);
-                                kho.ds_hoa_don.Add(hoa_don_nhap);
+
+                                HoaDonNhap hoa_don_nhap = new HoaDonNhap($"HD{kho.ds_hoa_don_nhap.Count + 1}", ds_nhap, nv_hien_tai, ncc);
+                                kho.them_hoa_don_nhap(hoa_don_nhap);
+
                                 ds_nhap = null;
                                 ncc = null;
                                 break;
@@ -195,6 +204,7 @@ internal class Program
                                 Console.WriteLine(hanghoa.ToString());
                             }
                         }
+
                         Console.WriteLine("1: Them san pham");
                         Console.WriteLine("2: Xoa san pham");
                         Console.WriteLine("3: Sua san pham");
@@ -202,6 +212,7 @@ internal class Program
                         Console.WriteLine("0: Huy");
                         Console.Write("Nhap so: ");
                         choice_xuat = Convert.ToInt32(Console.ReadLine());
+
                         switch (choice_xuat)
                         {
                             case 1:
@@ -209,66 +220,84 @@ internal class Program
                                 string id_them = Console.ReadLine();
                                 Console.Write("Nhap so luong san pham: ");
                                 uint so_luong_them = Convert.ToUInt32(Console.ReadLine());
-                                HangHoa sp_them;
-                                foreach (HangHoa hanghoa in kho.ds_san_pham)
+
+                                HangHoa sp_them = (HangHoa)kho.ds_san_pham.Find(hanghoa => hanghoa.id == id_them).Clone();
+                                HangHoa sp_ton_tai = ds_xuat.ds_san_pham.Find(hanghoa => hanghoa.id == id_them);
+
+                                if (sp_them != null)
                                 {
-                                    if (hanghoa.id == id_them)
+                                    if (kho.kha_dung(sp_them) == true)
                                     {
-                                        sp_them = (HangHoa)hanghoa.Clone();
-                                        sp_them.so_luong = so_luong_them;
-                                        ds_xuat.them_sp(sp_them);
-                                        break;
+                                        if (sp_ton_tai == null)
+                                        {
+                                            sp_them.so_luong = so_luong_them;
+                                            ds_xuat.them_sp(sp_them);
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("San pham da ton tai");
+                                        }
                                     }
-                                    if (kho.ds_san_pham.IndexOf(hanghoa) == kho.ds_san_pham.Count - 1)
+                                    else
                                     {
-                                        Console.WriteLine("San pham khong ton tai");
+                                        Console.WriteLine("So luong san pham trong kho khong du");
                                     }
                                 }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
+                                }
                                 break;
+
                             case 2:
                                 Console.Write("Nhap ID san pham muon xoa: ");
                                 string id_xoa = Console.ReadLine();
-                                foreach (HangHoa hanghoa in ds_xuat.ds_san_pham)
+
+                                HangHoa sp_xoa = ds_xuat.ds_san_pham.Find(hanghoa => hanghoa.id == id_xoa);
+                                if (sp_xoa != null)
                                 {
-                                    if (hanghoa.id == id_xoa)
-                                    {
-                                        ds_xuat.xoa_sp(hanghoa);
-                                        break;
-                                    }
-                                    if (ds_xuat.ds_san_pham.IndexOf(hanghoa) == ds_xuat.ds_san_pham.Count - 1)
-                                    {
-                                        Console.WriteLine("San pham khong ton tai");
-                                    }
+                                    ds_xuat.xoa_sp(sp_xoa);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
                                 }
                                 break;
+
                             case 3:
                                 Console.Write("Nhap ID san pham muon sua: ");
                                 string id_sua = Console.ReadLine();
-                                foreach (HangHoa hanghoa in ds_xuat.ds_san_pham)
+
+                                HangHoa sp_sua = ds_xuat.ds_san_pham.Find(hanghoa => hanghoa.id == id_sua);
+                                if (sp_sua != null)
                                 {
-                                    if (hanghoa.id == id_sua)
+                                    Console.Write("Nhap so luong san pham moi: ");
+                                    uint so_luong_moi = Convert.ToUInt32(Console.ReadLine());
+                                    if (kho.kha_dung(sp_sua) == true)
                                     {
-                                        Console.Write("Nhap so luong san pham moi: ");
-                                        uint so_luong_moi = Convert.ToUInt32(Console.ReadLine());
-                                        ds_xuat.capnhat_sp(hanghoa, so_luong_moi);
-                                        break;
+                                        ds_xuat.capnhat_sp(sp_sua, so_luong_moi);
                                     }
-                                    if (ds_xuat.ds_san_pham.IndexOf(hanghoa) == ds_xuat.ds_san_pham.Count - 1)
+                                    else
                                     {
-                                        Console.WriteLine("San pham khong ton tai");
+                                        Console.WriteLine("So luong san pham trong kho khong du");
                                     }
                                 }
+                                else
+                                {
+                                    Console.WriteLine("San pham khong ton tai");
+                                }
                                 break;
+
                             case 4:
                                 Console.Write("Nhap ID cua hang nhan: ");
                                 string id_ch_nhan = Console.ReadLine();
+
                                 CuaHang ch_nhan = kho.ds_cua_hang.Find(x => x.id_ch == id_ch_nhan);
-                                kho.capnhatkho(ds_xuat.ds_san_pham, true);
-                                Console.WriteLine("Nhap hang thanh cong");
-                                HoaDonXuat hoa_don_xuat = new HoaDonXuat($"HD{kho.ds_hoa_don.Count + 1}", ds_xuat, nv_hien_tai, ch_nhan);
                                 kho.capnhatkho(ds_xuat.ds_san_pham, false);
                                 Console.WriteLine("Xuat hang thanh cong");
-                                kho.ds_hoa_don.Add(hoa_don_xuat);
+
+                                HoaDonXuat hoa_don_xuat = new HoaDonXuat($"HD{kho.ds_hoa_don_xuat.Count + 1}", ds_xuat, nv_hien_tai, ch_nhan);
+                                kho.them_hoa_don_xuat(hoa_don_xuat);
                                 ds_xuat = null;
                                 ch_nhan = null;
                                 break;
@@ -279,11 +308,20 @@ internal class Program
                     break;
 
                 case 7:
-                    foreach (HoaDon hoa_don in kho.ds_hoa_don)
+                    Console.WriteLine("Danh sach hoa don nhap:");
+                    foreach (HoaDon hoa_don in kho.ds_hoa_don_nhap)
+                    {
+                        Console.WriteLine(hoa_don.ToString());
+                    }
+
+                    Console.WriteLine("Danh sach hoa don xuat:");
+                    foreach (HoaDon hoa_don in kho.ds_hoa_don_xuat)
                     {
                         Console.WriteLine(hoa_don.ToString());
                     }
                     break;
+
+                default:
 
                 case 0:
                     break;

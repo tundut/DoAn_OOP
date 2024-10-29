@@ -5,11 +5,17 @@ class KhoHang
     public List<NhanVien> ds_nhan_vien = new List<NhanVien>();
     public List<CuaHang> ds_cua_hang = new List<CuaHang>();
     public List<NhaCungCap> ds_ncc = new List<NhaCungCap>();
-    public List<HoaDon> ds_hoa_don = new List<HoaDon>();
+    public List<HoaDonNhap> ds_hoa_don_nhap = new List<HoaDonNhap>();
+    public List<HoaDonXuat> ds_hoa_don_xuat = new List<HoaDonXuat>();
 
-    bool kha_dung(HangHoa hh)
+    public bool kha_dung(HangHoa hh)
     {
-        return true;
+        HangHoa hh_kho = ds_san_pham.Find(hh_kho => hh_kho.id == hh.id);
+        if (hh.so_luong >= hh_kho.so_luong)
+        {
+            return true;
+        }
+        return false;
     }
 
     public void capnhatkho(List<HangHoa> ds_hh, bool nhap_xuat)
@@ -18,30 +24,19 @@ class KhoHang
         {
             foreach (HangHoa hanghoa in ds_hh)
             {
-                foreach (HangHoa hangHoa_kho in ds_san_pham)
-                {
-                    if (hanghoa.id == hangHoa_kho.id)
-                    {
-                        hangHoa_kho.so_luong += hanghoa.so_luong;
-                        break;
-                    }
-                }
+                HangHoa hh_kho = ds_san_pham.Find(hh_kho => hh_kho.id == hanghoa.id);
+                hh_kho.so_luong += hanghoa.so_luong;
             }
         }
         else
         {
             foreach (HangHoa hanghoa in ds_hh)
             {
-                foreach (HangHoa hangHoa_kho in ds_san_pham)
-                {
-                    if (hanghoa.id == hangHoa_kho.id)
-                    {
-                        hangHoa_kho.so_luong -= hanghoa.so_luong;
-                        break;
-                    }
-                }
+                HangHoa hh_kho = ds_san_pham.Find(hh_kho => hh_kho.id == hanghoa.id);
+                hh_kho.so_luong -= hanghoa.so_luong;
             }
         }
-
     }
+
+
 }

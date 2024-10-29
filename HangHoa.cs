@@ -24,6 +24,5 @@ abstract class HangHoa : ICloneable
         clone.ten_hang = this.ten_hang;
         clone.don_gia = this.don_gia;
         return clone;
-
     }
 }
