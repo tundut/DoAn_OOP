@@ -1,30 +1,107 @@
 ﻿using System.Runtime.ExceptionServices;
 using System.Transactions;
+using System.Xml.Serialization;
 
 internal class Program
 {
     private static void Main(string[] args)
     {
         KhoHang kho = new KhoHang();
-        kho.ds_san_pham.Add(new DienTu("DT01", "Quat may", 7, 150000));
-        kho.ds_san_pham.Add(new DienTu("DT02", "Noi com dien", 6, 250000));
-        kho.ds_san_pham.Add(new DoGiaDung("GD01", "Chao chong dinh", 9, 100000));
-        kho.ds_san_pham.Add(new DoGiaDung("GD02", "Ban an", 3, 500000));
-        kho.ds_san_pham.Add(new ThucPham("TP01", "Ga nguyen con", 12, 80000));
-        kho.ds_san_pham.Add(new ThucPham("TP02", "Nuoc ngot", 20, 10000));
+        // kho.ds_san_pham.Add(new DienTu("DT01", "Quat may", 7, 150000));
+        // kho.ds_san_pham.Add(new DienTu("DT02", "Noi com dien", 6, 250000));
+        // kho.ds_san_pham.Add(new DoGiaDung("GD01", "Chao chong dinh", 9, 100000));
+        // kho.ds_san_pham.Add(new DoGiaDung("GD02", "Ban an", 3, 500000));
+        // kho.ds_san_pham.Add(new ThucPham("TP01", "Ga nguyen con", 12, 80000));
+        // kho.ds_san_pham.Add(new ThucPham("TP02", "Nuoc ngot", 20, 10000));
 
-        kho.ds_nhan_vien.Add(new NhanVien("NV01", "Nguyen Phan Tuan Duc", 19, true, "Quang Ngai"));
-        kho.ds_nhan_vien.Add(new NhanVien("NV02", "Huynh Kim Nguyen", 20, false, "TP.HCM"));
-        kho.ds_nhan_vien.Add(new NhanVien("NV03", "Nguyen Hoang Bao", 24, true, "Quang Ngai"));
-        kho.ds_nhan_vien.Add(new NhanVien("NV04", "Vo Duc Hung", 35, true, "Quang Binh"));
+        XmlSerializer serializer1 = new XmlSerializer(typeof(List<HangHoa>));
+        string filePath1 = "Resources/hang_hoa.dat";
 
-        kho.ds_cua_hang.Add(new CuaHang("CH01", "Cua hang 1", "Binh Thanh"));
-        kho.ds_cua_hang.Add(new CuaHang("CH02", "Cua hang 2", "Quan 3"));
-        kho.ds_cua_hang.Add(new CuaHang("CH03", "Cua hang 3", "Quan 10"));
+        // using (StreamWriter writer = new StreamWriter(filePath1))
+        // {
+        //     serializer1.Serialize(writer, kho.ds_san_pham);
+        // }
 
-        kho.ds_ncc.Add(new NhaCungCap("NCC01", "ABC Corporation", "Tan Binh"));
-        kho.ds_ncc.Add(new NhaCungCap("NCC02", "XYZ Corporation", "Binh Chanh"));
-        kho.ds_ncc.Add(new NhaCungCap("NCC03", "DEF Corporation", "Binh Thanh"));
+        using (StreamReader reader = new StreamReader(filePath1))
+        {
+            kho.ds_san_pham = (List<HangHoa>)serializer1.Deserialize(reader);
+        }
+
+
+
+        // kho.ds_nhan_vien.Add(new NhanVien("NV01", "Nguyen Phan Tuan Duc", 19, true, "Quang Ngai"));
+        // kho.ds_nhan_vien.Add(new NhanVien("NV02", "Huynh Kim Nguyen", 20, false, "TP.HCM"));
+        // kho.ds_nhan_vien.Add(new NhanVien("NV03", "Nguyen Hoang Bao", 24, true, "Quang Ngai"));
+        // kho.ds_nhan_vien.Add(new NhanVien("NV04", "Vo Duc Hung", 35, true, "Quang Binh"));
+
+        XmlSerializer serializer2 = new XmlSerializer(typeof(List<NhanVien>));
+        string filePath2 = "Resources/nhan_vien.dat";
+
+        // using (StreamWriter writer = new StreamWriter(filePath2))
+        // {
+        //     serializer2.Serialize(writer, kho.ds_nhan_vien);
+        // }
+
+        using (StreamReader reader = new StreamReader(filePath2))
+        {
+            kho.ds_nhan_vien = (List<NhanVien>)serializer2.Deserialize(reader);
+        }
+
+
+
+        // kho.ds_cua_hang.Add(new CuaHang("CH01", "Cua hang 1", "Binh Thanh"));
+        // kho.ds_cua_hang.Add(new CuaHang("CH02", "Cua hang 2", "Quan 3"));
+        // kho.ds_cua_hang.Add(new CuaHang("CH03", "Cua hang 3", "Quan 10"));
+
+        XmlSerializer serializer3 = new XmlSerializer(typeof(List<CuaHang>));
+        string filePath3 = "Resources/cua_hang.dat";
+
+        // using (StreamWriter writer = new StreamWriter(filePath3))
+        // {
+        //     serializer3.Serialize(writer, kho.ds_cua_hang);
+        // }
+
+        using (StreamReader reader = new StreamReader(filePath3))
+        {
+            kho.ds_cua_hang = (List<CuaHang>)serializer3.Deserialize(reader);
+        }
+
+
+
+        // kho.ds_ncc.Add(new NhaCungCap("NCC01", "ABC Corporation", "Tan Binh"));
+        // kho.ds_ncc.Add(new NhaCungCap("NCC02", "XYZ Corporation", "Binh Chanh"));
+        // kho.ds_ncc.Add(new NhaCungCap("NCC03", "DEF Corporation", "Binh Thanh"));
+
+        XmlSerializer serializer4 = new XmlSerializer(typeof(List<NhaCungCap>));
+        string filePath4 = "Resources/nha_cung_cap.dat";
+
+        // using (StreamWriter writer = new StreamWriter(filePath4))
+        // {
+        //     serializer4.Serialize(writer, kho.ds_ncc);
+        // }
+
+        using (StreamReader reader = new StreamReader(filePath4))
+        {
+            kho.ds_ncc = (List<NhaCungCap>)serializer4.Deserialize(reader);
+        }
+
+
+        XmlSerializer serializer5 = new XmlSerializer(typeof(List<HoaDonNhap>));
+        string filePath5 = "Resources/hoa_don_nhap.dat";
+        using (StreamReader reader = new StreamReader(filePath5))
+        {
+            kho.ds_hoa_don_nhap = (List<HoaDonNhap>)serializer5.Deserialize(reader);
+        }
+
+        XmlSerializer serializer6 = new XmlSerializer(typeof(List<HoaDonXuat>));
+        string filePath6 = "Resources/hoa_don_xuat.dat";
+        using (StreamReader reader = new StreamReader(filePath6))
+        {
+            kho.ds_hoa_don_xuat = (List<HoaDonXuat>)serializer6.Deserialize(reader);
+        }
+
+
+
 
         NhanVien nv_hien_tai = kho.ds_nhan_vien.Find(nv => nv.id_nv == "NV01");
 
@@ -324,9 +401,36 @@ internal class Program
                 default:
 
                 case 0:
+                    using (StreamWriter writer = new StreamWriter(filePath1))
+                    {
+                        serializer1.Serialize(writer, kho.ds_san_pham);
+                    }
+
+                    using (StreamWriter writer = new StreamWriter(filePath2))
+                    {
+                        serializer2.Serialize(writer, kho.ds_nhan_vien);
+                    }
+
+                    using (StreamWriter writer = new StreamWriter(filePath3))
+                    {
+                        serializer3.Serialize(writer, kho.ds_cua_hang);
+                    }
+
+                    using (StreamWriter writer = new StreamWriter(filePath4))
+                    {
+                        serializer4.Serialize(writer, kho.ds_ncc);
+                    }
+
+                    using (StreamWriter writer = new StreamWriter(filePath5))
+                    {
+                        serializer5.Serialize(writer, kho.ds_hoa_don_nhap);
+                    }
+
+                    using (StreamWriter writer = new StreamWriter(filePath6))
+                    {
+                        serializer6.Serialize(writer, kho.ds_hoa_don_xuat);
+                    }
                     break;
-
-
             }
         }
     }

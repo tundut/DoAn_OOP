@@ -38,5 +38,13 @@ class KhoHang
         }
     }
 
+    public void them_hoa_don_nhap(HoaDonNhap hd_nhap)
+    {
+        ds_hoa_don_nhap.Add(hd_nhap);
+    }
 
+    public void them_hoa_don_xuat(HoaDonXuat hd_xuat)
+    {
+        ds_hoa_don_xuat.Add(hd_xuat);
+    }
 }

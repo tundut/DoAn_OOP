@@ -1,8 +1,14 @@
 using System.Text;
+using System.Runtime.Serialization;
 
-class HoaDonXuat : HoaDon
+[Serializable]
+public class HoaDonXuat : HoaDon
 {
     CuaHang cua_hang;
+    public HoaDonXuat()
+    {
+
+    }
     public HoaDonXuat(string ma_don_hang, QuanLyNhapXuat ds_san_pham, NhanVien nv_lap, CuaHang cua_hang) : base(ma_don_hang, ds_san_pham, nv_lap)
     {
         ngay_tao_don = DateTime.Now;
@@ -29,4 +35,16 @@ class HoaDonXuat : HoaDon
 
         return hoadon;
     }
+
+    public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
+    {
+        base.GetObjectData(info, context);
+        info.AddValue("cua_hang", cua_hang);
+    }
+
+    public HoaDonXuat(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+        cua_hang = (CuaHang)info.GetValue("cua_hang", typeof(CuaHang));
+    }
+
 }

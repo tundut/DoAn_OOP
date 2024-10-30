@@ -1,4 +1,4 @@
-class QuanLyNhapXuat
+public class QuanLyNhapXuat
 {
     public List<HangHoa> ds_san_pham = new List<HangHoa>();
 

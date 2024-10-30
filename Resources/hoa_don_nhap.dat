@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfHoaDonNhap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <HoaDonNhap>
+    <ma_don_hang>HD1</ma_don_hang>
+    <ngay_tao_don>2024-10-30T15:08:56.3258332+07:00</ngay_tao_don>
+    <ds_san_pham>
+      <ds_san_pham>
+        <HangHoa xsi:type="ThucPham">
+          <id>TP02</id>
+          <ten_hang>Nuoc ngot</ten_hang>
+          <so_luong>5</so_luong>
+          <don_gia>10000</don_gia>
+        </HangHoa>
+        <HangHoa xsi:type="DienTu">
+          <id>DT02</id>
+          <ten_hang>Noi com dien</ten_hang>
+          <so_luong>4</so_luong>
+          <don_gia>250000</don_gia>
+        </HangHoa>
+      </ds_san_pham>
+    </ds_san_pham>
+    <nv_lap>
+      <id_nv>NV01</id_nv>
+      <ten_nv>Nguyen Phan Tuan Duc</ten_nv>
+      <tuoi>19</tuoi>
+      <gioi_tinh>true</gioi_tinh>
+      <dia_chi_nv>Quang Ngai</dia_chi_nv>
+    </nv_lap>
+    <tong_tien>0</tong_tien>
+  </HoaDonNhap>
+</ArrayOfHoaDonNhap>
